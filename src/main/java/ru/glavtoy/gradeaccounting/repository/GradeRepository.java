@@ -1,2 +1,6 @@
-package ru.glavtoy.gradeaccounting.repository;public interface GradeRepository {
-}
+package ru.glavtoy.gradeaccounting.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import ru.glavtoy.gradeaccounting.model.Grade;
+
+public interface GradeRepository extends JpaRepository<Grade, Long> {}

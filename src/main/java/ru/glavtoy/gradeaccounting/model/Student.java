@@ -19,7 +19,9 @@ public class Student {
     @Column(unique = true)
     private Long id;
 
-    private String name;
+    private String firstname;
+    private String lastname;
+    private String campus;
 
     @ManyToAny
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)

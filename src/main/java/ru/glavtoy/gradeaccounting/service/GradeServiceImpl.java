@@ -49,12 +49,15 @@ public class GradeServiceImpl implements GradeService {
 
     @Override
     public Double getOverallGPA(Long id) {
-        double gpa = 0;
+        double gpa = 0.0;
         List<Grade> grades = new ArrayList<>(gradeRepository.getGradeByStudentId(id));
         for (Grade grade : grades) {
             gpa += grade.getValue();
         }
-        return gpa / grades.size();
+        if (!grades.isEmpty()) {
+            return gpa / grades.size();
+        }
+        return 0.0;
     }
 
     @Override

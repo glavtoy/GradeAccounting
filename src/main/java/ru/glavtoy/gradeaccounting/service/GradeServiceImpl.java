@@ -1,8 +1,8 @@
 package ru.glavtoy.gradeaccounting.service;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import ru.glavtoy.gradeaccounting.controller.GradeController;
 import ru.glavtoy.gradeaccounting.dto.GradeDTO;
 import ru.glavtoy.gradeaccounting.model.Grade;
 import ru.glavtoy.gradeaccounting.model.Student;
@@ -55,5 +55,17 @@ public class GradeServiceImpl implements GradeService {
             gpa += grade.getValue();
         }
         return gpa / grades.size();
+    }
+
+    @Override
+    public List<GradeDTO> getAllGrades(Long id) {
+        List<GradeDTO> grades = new ArrayList<>();
+        gradeRepository.getGradeByStudentId(id).forEach(grade -> {
+            grades.add(GradeDTO.builder()
+                    .subject(grade.getSubject())
+                    .value(grade.getValue())
+                    .timestamp(grade.getTimestamp()).build());
+        });
+        return grades;
     }
 }
